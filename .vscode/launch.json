@@ -1,0 +1,81 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}"
+        },
+        {
+            "name": "CUDA0_train_ViT",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/",
+            "justMyCode": true,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+                "./configs/thumos_i3d.yaml",
+                "--output", "pretrained"
+            ]   
+        },
+        {
+            "name": "CUDA0_eval_ViT",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/",
+            "justMyCode": true,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            },
+            "args": [
+                "./configs/thumos_i3d.yaml",
+                "./ckpt_ViT/thumos_i3d_ViT_layer6/epoch_099.pth.tar"
+            ]   
+        },
+        {
+            "name": "CUDA1_hacs_train",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/",
+            "justMyCode": true,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "args": [
+                "./configs/hacs_slowfast.yaml",
+                "--output", "pretrained"
+            ]   
+        },
+        {
+            "name": "CUDA1_hacs_eval",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/",
+            "justMyCode": true,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1"
+            },
+            "args": [
+                "./configs/hacs_slowfast.yaml",
+                "/home/ubuntu/disk1/Even/code/TriDet/ckpt_2/hacs_slowfast_allepoch100_warm10_bin15_layer5/epoch_099.pth.tar"
+            ]   
+        },
+    ]
+}
